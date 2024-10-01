@@ -1,0 +1,19 @@
+def minimax(node, depth, isMaximizer):
+    # Base case: If it's a terminal node or depth is 0, return the evaluation
+    if terminal_node(node) or depth == 0:
+        return evaluation(node)
+    
+    if isMaximizer:
+        maxEval = -float('inf')  # representing negative infinity
+        # Loop through each child node
+        for child in get_children(node):
+            eval = minimax(child, depth - 1, False)
+            maxEval = max(maxEval, eval)  # Maximizer chooses the highest value
+        return maxEval
+    else:
+        minEval = float('inf')  #  representing positive infinity
+        # Loop through each child node
+        for child in get_children(node):
+            eval = minimax(child, depth - 1, True)
+            minEval = min(minEval, eval)  # Minimizer chooses the lowest value
+        return minEval
